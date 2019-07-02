@@ -12,7 +12,7 @@ Y = data['NC']
 
 def regression_pls (x_test, X=X, Y=Y):
     X_train, X_TEST, Y_train, Y_TESTE = train_test_split(
-        X, Y, test_size=0.4, random_state=1121533
+        X, Y, test_size=0.4, random_state=1589078
         )
     x_test = pd.DataFrame([x_test for i in range(len(X_TEST))])
     PLS = PLSRegression(n_components=2)
@@ -22,7 +22,7 @@ def regression_pls (x_test, X=X, Y=Y):
 
 def regression_mlr (x_test, X=X, Y=Y):
     X_train, X_TEST, Y_train, Y_TESTE = train_test_split(
-        X, Y, test_size=0.4, random_state=941692
+        X, Y, test_size=0.4, random_state=233080
         )
     x_test = pd.DataFrame([x_test for i in range(len(X_TEST))])
     MLR = LinearRegression()
@@ -32,10 +32,10 @@ def regression_mlr (x_test, X=X, Y=Y):
 
 def regression_svr (x_test, X=X, Y=Y):
     X_train, X_TEST, Y_train, Y_TESTE = train_test_split(
-        X, Y, test_size=0.4, random_state=1924305
+        X, Y, test_size=0.4, random_state=1384793
         )
     x_test = pd.DataFrame([x_test for i in range(len(X_TEST))])
-    SVR = LinearSVR()
+    SVR = LinearSVR(random_state=52920)
     SVR.fit(X_train,Y_train)
     SVR_predict = SVR.predict(x_test)
     return Y_TESTE, SVR_predict
