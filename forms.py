@@ -1,9 +1,8 @@
-from flask_wtf import FlaskForm
-from wtforms import DecimalField, RadioField, SubmitField
+from wtforms import DecimalField, Form, RadioField
 from wtforms.validators import NumberRange
 
 
-class NCForm(FlaskForm):
+class NCForm(Form):
     c8_0 = DecimalField('C8:0', validators=[NumberRange()], default=0.00)
     c10_0 = DecimalField('C10:0', validators=[NumberRange()], default=0.00)
     c12_0 = DecimalField('C12:0', validators=[NumberRange()], default=0.00)
@@ -19,4 +18,3 @@ class NCForm(FlaskForm):
     c22_1 = DecimalField('C22:1', validators=[NumberRange()], default=0.00)
     outros = DecimalField('Outros', validators=[NumberRange()], default=0.00)
     regression = RadioField(choices=[('pls', 'PLS Regression'), ('mlr', 'MLR Regression'), ('svr', 'SVR Regression')], default='pls')
-    submit = SubmitField('Enviar')

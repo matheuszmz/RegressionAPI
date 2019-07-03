@@ -1,9 +1,9 @@
-import pandas as pd
 import numpy as np
+import pandas as pd
 from sklearn import metrics
-from sklearn.model_selection import train_test_split
 from sklearn.cross_decomposition import PLSRegression
 from sklearn.linear_model import LinearRegression
+from sklearn.model_selection import train_test_split
 from sklearn.svm import LinearSVR
 
 data = pd.read_json('cetano.json')
