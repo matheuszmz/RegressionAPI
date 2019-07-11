@@ -2,8 +2,7 @@ import pandas as pd
 from flask import Blueprint, flash, render_template, request
 
 from forms import NCForm
-from regression import (metrics_calc, regression_mlr, regression_pls,
-                        regression_svr)
+from regression import regression_mlr, regression_pls, regression_svr
 
 page = Blueprint('page', __name__, template_folder='templates')
 
@@ -32,25 +31,22 @@ def index ():
             flash('Error: Somatório dos valores maior que 100.')
         else:
             if form.regression.data == 'pls':
-                Y_test, predict = regression_pls(data)
-                r2, mae, mse, rmse = metrics_calc(Y_test, predict)
+                predict, r2, mae, mse, rmse = regression_pls(data)
                 flash('PLS Regression')
-                flash('NC = {}'.format(predict[0][0]))
+                flash('NC = {:.2f}'.format(float(predict[0][0])))
             elif form.regression.data == 'mlr':
-                Y_test, predict = regression_mlr(data)
-                r2, mae, mse, rmse = metrics_calc(Y_test, predict)
+                predict, r2, mae, mse, rmse = regression_mlr(data)
                 flash('MLR Regression')
-                flash('NC = {}'.format(predict[0]))
+                flash('NC = {:.2f}'.format(predict[0]))
             elif form.regression.data == 'svr':
-                Y_test, predict = regression_svr(data)
-                r2, mae, mse, rmse = metrics_calc(Y_test, predict)
+                predict, r2, mae, mse, rmse = regression_svr(data)
                 flash('SVR Regression')
-                flash('NC = {}'.format(predict[0]))
-
-            flash('R² = {}'.format(r2))
-            flash('MAE = {}'.format(mae))
-            flash('MSE = {}'.format(mse))
-            flash('RMSE = {}'.format(rmse))
+                flash('NC = {:.2f}'.format(predict[0]))
+        
+        #flash('R² = {:.2f}'.format(float(r2)))
+        #flash('MAE = {:.2f}'.format(float(mae)))
+        #flash('MSE = {:.2f}'.format(float(mse)))
+        #flash('RMSE = {:.2f}'.format(float(rmse)))
 
         return render_template('index.html', form=form)
 
